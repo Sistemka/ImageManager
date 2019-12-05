@@ -1,8 +1,10 @@
 from app.app import api
 from app.handlers import (
     errors,
-    image
+    image,
+    url
 )
 
 image.register(api)
+url.register(api)
 errors.register()
