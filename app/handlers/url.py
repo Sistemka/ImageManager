@@ -7,7 +7,7 @@ from models import Items
 ns = Namespace(
     'url',
     description=(
-        'Handlers to upload images in fs and they urls in database'
+        'Handlers to get urls for images'
     ),
     validate=True
 )

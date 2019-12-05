@@ -5,8 +5,8 @@ from flask_restplus import Resource, Namespace
 from werkzeug.utils import secure_filename
 
 from app.app import basic_args, image_args
-from settings.paths import IMAGES_DIR
 from models import Types, Items
+from settings.paths import IMAGES_DIR
 
 ns = Namespace(
     'image',
