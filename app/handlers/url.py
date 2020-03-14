@@ -15,11 +15,11 @@ ns = Namespace(
 
 @ns.route('/all')
 @ns.expect(basic_args)
-class Predict(Resource):
+class GetUrls(Resource):
     def get(self):
         basic_args.parse_args()
-        record = Items.select()
-        urls = [r.url for r in record]
+        record = Items.find()
+        urls = [r.get('path') for r in record]
         return jsonify({
             'error': False,
             'result': urls

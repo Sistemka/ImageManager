@@ -1,3 +1,4 @@
+import uuid
 from pathlib import Path
 
 from flask import jsonify, send_from_directory
@@ -5,7 +6,7 @@ from flask_restplus import Resource, Namespace
 from werkzeug.utils import secure_filename
 
 from app.app import basic_args, image_args
-from models import Types, Items
+from models import Items
 from settings.paths import IMAGES_DIR
 
 ns = Namespace(
@@ -26,6 +27,7 @@ class Upload(Resource):
         args = image_args.parse_args()
 
         image = args['image']
+        image.filename = str(uuid.uuid4())+'.png'
         image_path = Path(IMAGES_DIR, args['type'])
         image_path.mkdir(parents=True, exist_ok=True)
         image_path_with_name = Path(
@@ -33,17 +35,12 @@ class Upload(Resource):
         ).as_posix()
         image.save(image_path_with_name)
 
-        type_, _ = Types.get_or_create(
-            type=args['type']
-        )
-        item, is_created = Items.get_or_create(
-            url=Path(
+        args.pop('image')
+        args['path'] = Path(
                 args['type'], secure_filename(image.filename)
             ).as_posix()
-        )
-        if is_created:
-            item.type = type_.id
-            item.save()
+        Items.insert(args)
+
         return jsonify({
             'error': False,
             'message': 'saved'

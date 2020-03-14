@@ -8,10 +8,9 @@ load_dotenv(
     os.path.join(BASE_DIR, 'settings', 'env')
 )
 
-PG_CONN = {
-    'host': os.environ.get('PG_HOST', 'localhost'),
-    'database': os.environ.get('PG_DATABASE'),
-    'user': os.environ.get('PG_USER'),
-    'password': os.environ.get('PG_PASSWORD'),
-    'autorollback': True,
+MONGO_CONN = {
+    'host': os.environ.get('MONGO_HOST', 'localhost'),
+    'port': os.environ.get('MONGO_PORT', 27017),
 }
+
+MONGO_DB = os.environ.get('MONGO_DB', 'parsed_data')
