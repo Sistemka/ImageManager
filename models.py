@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+
 from settings.config import MONGO_CONN, MONGO_DB
 
 
