@@ -27,7 +27,7 @@ class Upload(Resource):
         args = image_args.parse_args()
 
         image = args['image']
-        image.filename = str(uuid.uuid4())+'.png'
+        image.filename = str(uuid.uuid4()) + '.png'
         image_path = Path(IMAGES_DIR, args['type'])
         image_path.mkdir(parents=True, exist_ok=True)
         image_path_with_name = Path(
@@ -37,8 +37,8 @@ class Upload(Resource):
 
         args.pop('image')
         args['path'] = Path(
-                args['type'], secure_filename(image.filename)
-            ).as_posix()
+            args['type'], secure_filename(image.filename)
+        ).as_posix()
         Items.insert(args)
 
         return jsonify({

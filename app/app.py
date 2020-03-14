@@ -1,9 +1,9 @@
+from werkzeug.datastructures import FileStorage
+from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_restplus import Api, reqparse
+from flask import Flask
 import werkzeug
 werkzeug.cached_property = werkzeug.utils.cached_property
-from flask import Flask
-from flask_restplus import Api, reqparse
-from werkzeug.middleware.proxy_fix import ProxyFix
-from werkzeug.datastructures import FileStorage
 
 app = Flask(__name__)
 
@@ -19,10 +19,12 @@ api = Api(
 
 
 basic_args = reqparse.RequestParser(bundle_errors=True, trim=True)
-basic_args.add_argument('X-SERVICE-NAME', location='headers', required=True, nullable=False)
+basic_args.add_argument(
+    'X-SERVICE-NAME', location='headers', required=True, nullable=False)
 
 image_args = reqparse.RequestParser(bundle_errors=True, trim=True)
-image_args.add_argument('image', type=FileStorage, location='files', required=True)
+image_args.add_argument('image', type=FileStorage,
+                        location='files', required=True)
 image_args.add_argument('type', type=str, required=True)
 image_args.add_argument('цена', type=int, required=True)
 image_args.add_argument('пол', type=str, required=False)
