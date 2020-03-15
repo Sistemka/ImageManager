@@ -1,5 +1,5 @@
 from flask import jsonify
-from flask_restplus import Resource, Namespace
+from flask_restx import Resource, Namespace
 
 from app.app import basic_args
 from models import Items

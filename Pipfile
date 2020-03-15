@@ -18,10 +18,10 @@ flake8-builtins = "*"
 peewee-db-evolve = "*"
 peewee = "*"
 psycopg2-binary = "*"
-flask-restplus = "*"
 gunicorn = "*"
 python-dotenv = "*"
 pymongo = "*"
+flask-restx = "*"
 
 [requires]
 python_version = "3.6"

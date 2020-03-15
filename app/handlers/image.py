@@ -2,8 +2,7 @@ import uuid
 from pathlib import Path
 
 from flask import jsonify, send_from_directory
-from flask_restplus import Resource, Namespace
-from werkzeug.utils import secure_filename
+from flask_restx import Resource, Namespace
 
 from app.app import basic_args, image_args
 from models import Items
@@ -27,17 +26,17 @@ class Upload(Resource):
         args = image_args.parse_args()
 
         image = args['image']
-        image.filename = str(uuid.uuid4()) + '.png'
+        image.filename = f"{uuid.uuid4()}.png"
         image_path = Path(IMAGES_DIR, args['type'])
         image_path.mkdir(parents=True, exist_ok=True)
         image_path_with_name = Path(
-            image_path, secure_filename(image.filename)
+            image_path, image.filename
         ).as_posix()
         image.save(image_path_with_name)
 
         args.pop('image')
         args['path'] = Path(
-            args['type'], secure_filename(image.filename)
+            args['type'], image.filename
         ).as_posix()
         Items.insert(args)
 
