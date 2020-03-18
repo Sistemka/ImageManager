@@ -4,7 +4,7 @@ from pathlib import Path
 from flask import jsonify, send_from_directory
 from flask_restx import Resource, Namespace
 
-from app.app import basic_args, image_args
+from app.app import basic_args, image_args, info_args
 from models import Items
 from settings.paths import IMAGES_DIR
 
@@ -59,6 +59,20 @@ class Download(Resource):
             filename=image_name
         )
 
+@ns.route('/get-info')
+@ns.expect(basic_args)
+class GetInfo(Resource):
+    @ns.expect(info_args)
+    def post(self):
+        basic_args.parse_args()
+        args = info_args.parse_args()
+        response = Items.find_one(args)
+        response.pop('_id')
+
+        return jsonify({
+            'error': False,
+            'result': dict(response)
+        })
 
 def register(main_api):
     main_api.add_namespace(ns)
