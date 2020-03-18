@@ -59,6 +59,7 @@ class Download(Resource):
             filename=image_name
         )
 
+
 @ns.route('/get-info')
 @ns.expect(basic_args)
 class GetInfo(Resource):
@@ -73,6 +74,7 @@ class GetInfo(Resource):
             'error': False,
             'result': dict(response)
         })
+
 
 def register(main_api):
     main_api.add_namespace(ns)
