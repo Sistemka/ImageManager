@@ -64,7 +64,7 @@ class Download(Resource):
 @ns.expect(basic_args)
 class GetInfo(Resource):
     @ns.expect(info_args)
-    def post(self):
+    def get(self):
         basic_args.parse_args()
         args = info_args.parse_args()
         response = Items.find_one(args)

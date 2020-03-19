@@ -34,6 +34,5 @@ image_args.add_argument('цвет', type=str, required=True)
 image_args.add_argument('бренд', type=str, required=True)
 image_args.add_argument('link', type=str, required=True)
 
-
 info_args = reqparse.RequestParser(bundle_errors=True, trim=True)
 info_args.add_argument('path', type=str, required=True)
