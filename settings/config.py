@@ -13,4 +13,4 @@ MONGO_CONN = {
     'port': os.environ.get('MONGO_PORT', 27017),
 }
 
-MONGO_DB = os.environ.get('MONGO_DB', 'parsed_data')
+MONGO_DB = os.environ.get('MONGO_DB', 'parsed_data2')
